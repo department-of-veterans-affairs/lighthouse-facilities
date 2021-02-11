@@ -230,6 +230,14 @@ public class InternalFacilitiesController {
                                                 MAPPER,
                                                 z.cmsOperatingStatus(),
                                                 Facility.OperatingStatus.class))
+                                    .cmsServices(
+                                        z.cmsServices() == null
+                                            ? null
+                                            : List.of(
+                                                FacilitiesJacksonConfig.quietlyMap(
+                                                    MAPPER,
+                                                    z.cmsServices(),
+                                                    Facility.CmsService[].class)))
                                     .build())
                             .overlayServices(z.graveyardOverlayServices())
                             .missing(
@@ -263,6 +271,7 @@ public class InternalFacilitiesController {
               .id(id)
               .facility(entity.facility())
               .cmsOperatingStatus(entity.cmsOperatingStatus())
+              .cmsServices(entity.cmsServices())
               .graveyardOverlayServices(
                   entity.overlayServices() == null ? null : new HashSet<>(entity.overlayServices()))
               .missingTimestamp(entity.missingTimestamp())
@@ -504,6 +513,7 @@ public class InternalFacilitiesController {
           FacilityEntity.builder()
               .id(pk)
               .cmsOperatingStatus(zombieEntity.cmsOperatingStatus())
+              .cmsServices(zombieEntity.cmsServices())
               .overlayServices(
                   zombieEntity.graveyardOverlayServices() == null
                       ? null

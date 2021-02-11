@@ -42,6 +42,11 @@ public class FacilityGraveyardEntity {
   @Column(name = "cms_operating_status")
   private String cmsOperatingStatus;
 
+  @Lob
+  @Basic(fetch = FetchType.EAGER)
+  @Column(name = "cms_services")
+  private String cmsServices;
+
   @ElementCollection(targetClass = String.class)
   @CollectionTable(
       name = "cms_graveyard_overlay_detailed_services",
