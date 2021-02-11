@@ -120,7 +120,6 @@ public final class GeoFacility {
     Facility.OperatingStatus operatingStatus;
 
     @Valid
-    @NotNull
     @JsonProperty(value = "detailed_services", required = true)
     List<Facility.CmsService> detailedServices;
 

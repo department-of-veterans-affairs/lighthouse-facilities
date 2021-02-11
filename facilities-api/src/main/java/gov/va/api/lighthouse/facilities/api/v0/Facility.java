@@ -297,7 +297,6 @@ public final class Facility {
     OperatingStatus operatingStatus;
 
     @Valid
-    @NotNull
     @JsonProperty(value = "detailed_services", required = true)
     List<CmsService> cmsServices;
 
