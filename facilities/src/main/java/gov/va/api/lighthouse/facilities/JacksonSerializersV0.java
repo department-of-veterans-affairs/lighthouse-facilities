@@ -253,6 +253,7 @@ final class JacksonSerializersV0 {
       jgen.writeObjectField("mobile", value.mobile());
       jgen.writeObjectField("active_status", value.activeStatus());
       jgen.writeObjectField("operating_status", value.operatingStatus());
+      jgen.writeObjectField("detailed_services", value.cmsServices());
       jgen.writeObjectField("visn", value.visn());
       jgen.writeEndObject();
     }
@@ -499,6 +500,7 @@ final class JacksonSerializersV0 {
       jgen.writeObjectField("mobile", value.mobile());
       jgen.writeObjectField("active_status", value.activeStatus());
       jgen.writeObjectField("operating_status", value.operatingStatus());
+      jgen.writeObjectField("detailed_services", value.detailedServices());
       jgen.writeObjectField("visn", value.visn());
       jgen.writeEndObject();
     }

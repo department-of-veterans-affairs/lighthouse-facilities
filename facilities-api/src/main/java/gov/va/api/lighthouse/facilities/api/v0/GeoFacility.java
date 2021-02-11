@@ -119,6 +119,11 @@ public final class GeoFacility {
     @JsonProperty(value = "operating_status", required = true)
     Facility.OperatingStatus operatingStatus;
 
+    @Valid
+    @NotNull
+    @JsonProperty(value = "detailed_services", required = true)
+    List<Facility.CmsService> detailedServices;
+
     @Schema(example = "20")
     String visn;
   }

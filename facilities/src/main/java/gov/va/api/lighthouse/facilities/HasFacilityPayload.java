@@ -6,6 +6,8 @@ import java.util.Set;
 public interface HasFacilityPayload {
   String cmsOperatingStatus();
 
+  String cmsServices();
+
   String facility();
 
   Set<String> overlayServices();

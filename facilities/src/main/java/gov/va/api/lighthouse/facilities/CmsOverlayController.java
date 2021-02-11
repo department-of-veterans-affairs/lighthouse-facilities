@@ -70,6 +70,10 @@ public class CmsOverlayController {
         }
       }
       entity.overlayServices(detailedServices);
+
+      // Save the full payload as well
+      entity.cmsServices(
+          FacilitiesJacksonConfig.createMapper().writeValueAsString(overlay.cmsServices()));
     }
 
     repository.save(entity);

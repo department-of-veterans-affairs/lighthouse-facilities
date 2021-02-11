@@ -60,6 +60,14 @@ public class FacilityOverlay implements Function<HasFacilityPayload, Facility> {
     }
   }
 
+  private static void applyCmsServices(Facility facility, List<Facility.CmsService> cmsServices) {
+    if (cmsServices == null) {
+      log.warn("CMS Overlay for facility {} is missing CMS Services", facility.id());
+    } else {
+      facility.attributes().cmsServices(cmsServices);
+    }
+  }
+
   private static OperatingStatus determineOperatingStatusFromActiveStatus(
       ActiveStatus activeStatus) {
     if (activeStatus == ActiveStatus.T) {
@@ -84,6 +92,10 @@ public class FacilityOverlay implements Function<HasFacilityPayload, Facility> {
     }
     if (entity.overlayServices() != null) {
       applyCmsOverlayServices(facility, entity.overlayServices());
+    }
+    if (entity.cmsServices() != null) {
+      applyCmsServices(
+          facility, List.of(mapper.readValue(entity.cmsServices(), Facility.CmsService[].class)));
     }
     return facility;
   }

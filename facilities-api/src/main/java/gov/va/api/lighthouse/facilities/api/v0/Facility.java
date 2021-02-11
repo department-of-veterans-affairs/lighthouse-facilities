@@ -100,6 +100,91 @@ public final class Facility {
    */
   public interface ServiceType {}
 
+  // todo descriptions
+  @Data
+  @Builder
+  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+  public static final class DetailedServiceAddress {
+    @Schema(example = "50 Irving Street, Northwest")
+    @JsonProperty("address_line1")
+    String address1;
+
+    @JsonProperty("address_line2")
+    String address2;
+
+    @Schema(example = "NY")
+    @JsonProperty("administrative_area")
+    String administrativeArea;
+
+    @JsonProperty("building_name_number")
+    String buildingNameNumber;
+
+    @JsonProperty("clinic_name")
+    String clinicName;
+
+    @JsonProperty("country_code")
+    String countryCode;
+
+    String locality;
+
+    @Schema(example = "20422-0001")
+    @JsonProperty("zip_code")
+    String zipCode;
+
+    @Schema(example = "Wing East")
+    @JsonProperty("wing_floor_or_room_number")
+    String wingFloorOrRoomNumber;
+  }
+
+  // todo descriptions
+  @Data
+  @Builder
+  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+  public static final class DetailedServicePhoneNumbers {
+    String extension;
+
+    String label;
+
+    String number;
+
+    String type;
+  }
+
+  // todo descriptions
+  @Data
+  @Builder
+  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+  public static final class DetailedServiceLocations {
+
+    @JsonProperty("additional_hours_info")
+    String additionalHoursInfo;
+
+    @JsonProperty("email_contacts")
+    List<DetailedServiceEmailContacts> emailContacts;
+
+    @JsonProperty("facility_service_hours")
+    Hours facilityServiceHours;
+
+    @JsonProperty("phone_numbers")
+    List<DetailedServicePhoneNumbers> phoneNumbers;
+
+    @JsonProperty("service_location_address")
+    DetailedServiceAddress serviceLocationAddress;
+  }
+
+  @Data
+  @Builder
+  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+  public static final class DetailedServiceEmailContacts {
+    @Schema(example = "georgea@va.gov")
+    @JsonProperty("email_address")
+    String emailAddress;
+
+    @Schema(example = "George Anderson")
+    @JsonProperty("email_label")
+    String emailLabel;
+  }
+
   @Data
   @Builder
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
@@ -153,6 +238,7 @@ public final class Facility {
     "mobile",
     "active_status",
     "operating_status",
+    "detailed_services",
     "visn"
   })
   public static final class FacilityAttributes {
@@ -209,6 +295,11 @@ public final class Facility {
     @NotNull
     @JsonProperty(value = "operating_status", required = true)
     OperatingStatus operatingStatus;
+
+    @Valid
+    @NotNull
+    @JsonProperty(value = "detailed_services", required = true)
+    List<CmsService> cmsServices;
 
     @Schema(example = "20")
     String visn;
@@ -344,6 +435,10 @@ public final class Facility {
         description = "0 means service is inactive and 1 means active")
     int active;
 
+    // todo add description
+    @Schema(example = "2021-02-04T22:36:49+00:00", description = "todo")
+    String changed;
+
     @Schema(example = "Vaccine availability for COVID-19")
     @JsonProperty("description_national")
     String descriptionNational;
@@ -359,6 +454,45 @@ public final class Facility {
     @Schema(example = "12345")
     @JsonProperty("health_service_api_id")
     String healthServiceApiId;
+
+    // todo example?
+    @Schema(example = "Your VA health care team will contact you if you...more text")
+    @JsonProperty("hservice_appt_leadin")
+    String healthServiceAppointmentLeadIn;
+
+    @Schema(
+        example = "0",
+        type = "integer",
+        description = "0 means online scheduling is unavailable and 1 means available")
+    @JsonProperty("online_scheduling_available")
+    int onlineSchedulingAvailable;
+
+    // todo example?
+    @Schema(
+        example = "\\/erie-health-care\\/locations\\/erie-va-medical-center\\/covid-19-vaccines")
+    String path;
+
+    // todo description and example?
+    @JsonProperty("phone_numbers")
+    List<DetailedServicePhoneNumbers> phoneNumbers;
+
+    @Schema(
+        example = "0",
+        type = "integer",
+        description = "0 means referral is not required and 1 means required")
+    @JsonProperty("referral_required")
+    int referralRequired;
+
+    // todo description and example?
+    @JsonProperty("service_locations")
+    List<DetailedServiceLocations> serviceLocations;
+
+    @Schema(
+        example = "1",
+        type = "integer",
+        description = "0 means walk ins are not accepted and 1 means accepted")
+    @JsonProperty("walk_ins_accepted")
+    int walkInsAccepted;
   }
 
   @Data

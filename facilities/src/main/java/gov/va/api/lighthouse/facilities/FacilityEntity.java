@@ -75,6 +75,11 @@ public class FacilityEntity implements HasFacilityPayload {
   @Column(name = "cms_operating_status")
   private String cmsOperatingStatus;
 
+  @Lob
+  @Basic(fetch = FetchType.EAGER)
+  @Column(name = "cms_services")
+  private String cmsServices;
+
   @ElementCollection(targetClass = String.class)
   @CollectionTable(
       name = "cms_overlay_detailed_services",
@@ -109,6 +114,7 @@ public class FacilityEntity implements HasFacilityPayload {
       double longitude,
       String facility,
       String cmsOperatingStatus,
+      String cmsServices,
       Set<Facility.ServiceType> overlayServiceTypes,
       Integer version,
       Set<Facility.ServiceType> servicesTypes,
@@ -125,6 +131,7 @@ public class FacilityEntity implements HasFacilityPayload {
         servicesTypes.stream().map(Object::toString).collect(toSet()),
         facility,
         cmsOperatingStatus,
+        cmsServices,
         overlayServiceTypes.stream().map(Object::toString).collect(toSet()),
         version,
         missingTimestamp,
