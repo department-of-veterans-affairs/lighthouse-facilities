@@ -1,6 +1,7 @@
 package gov.va.api.lighthouse.facilities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import gov.va.api.lighthouse.facilities.api.cms.DetailedService;
 import gov.va.api.lighthouse.facilities.api.v0.Facility;
 import gov.va.api.lighthouse.facilities.api.v0.Facility.ActiveStatus;
 import gov.va.api.lighthouse.facilities.api.v0.Facility.OperatingStatus;
@@ -60,11 +61,12 @@ public class FacilityOverlay implements Function<HasFacilityPayload, Facility> {
     }
   }
 
-  private static void applyCmsServices(Facility facility, List<Facility.CmsService> cmsServices) {
-    if (cmsServices == null) {
-      log.warn("CMS Overlay for facility {} is missing CMS Services", facility.id());
+  private static void applyDetailedServices(
+      Facility facility, List<DetailedService> detailedServices) {
+    if (detailedServices == null) {
+      log.warn("CMS Overlay for facility {} is missing Detailed CMS Services", facility.id());
     } else {
-      facility.attributes().cmsServices(cmsServices);
+      facility.attributes().detailedServices(detailedServices);
     }
   }
 
@@ -94,8 +96,8 @@ public class FacilityOverlay implements Function<HasFacilityPayload, Facility> {
       applyCmsOverlayServices(facility, entity.overlayServices());
     }
     if (entity.cmsServices() != null) {
-      applyCmsServices(
-          facility, List.of(mapper.readValue(entity.cmsServices(), Facility.CmsService[].class)));
+      applyDetailedServices(
+          facility, List.of(mapper.readValue(entity.cmsServices(), DetailedService[].class)));
     }
     return facility;
   }

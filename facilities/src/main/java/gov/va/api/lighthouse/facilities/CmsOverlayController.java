@@ -3,7 +3,7 @@ package gov.va.api.lighthouse.facilities;
 import static gov.va.api.health.autoconfig.logging.LogSanitizer.sanitize;
 
 import gov.va.api.lighthouse.facilities.api.cms.CmsOverlay;
-import gov.va.api.lighthouse.facilities.api.v0.Facility;
+import gov.va.api.lighthouse.facilities.api.cms.DetailedService;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -56,10 +56,10 @@ public class CmsOverlayController {
           FacilitiesJacksonConfig.createMapper().writeValueAsString(overlay.operatingStatus()));
     }
 
-    if (overlay.cmsServices() != null) {
+    if (overlay.detailedServices() != null) {
       // Compile the set of overlay services to be added
       Set<String> detailedServices = new HashSet<>();
-      for (Facility.CmsService service : overlay.cmsServices()) {
+      for (DetailedService service : overlay.detailedServices()) {
         // Since the covid 19 service name doesn't match our enum, we need to update and verify??
         if (1 == service.active()) {
           if (service.name().equals("COVID-19 vaccines")) {
@@ -73,7 +73,9 @@ public class CmsOverlayController {
 
       // Save the full payload as well
       entity.cmsServices(
-          FacilitiesJacksonConfig.createMapper().writeValueAsString(overlay.cmsServices()));
+          FacilitiesJacksonConfig.createMapper().writeValueAsString(overlay.detailedServices()));
+
+      System.out.println("SERVICES: " + overlay.detailedServices());
     }
 
     repository.save(entity);

@@ -14,6 +14,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import gov.va.api.health.autoconfig.configuration.JacksonConfig;
 import gov.va.api.lighthouse.facilities.api.cms.CmsOverlay;
+import gov.va.api.lighthouse.facilities.api.cms.DetailedService;
 import gov.va.api.lighthouse.facilities.api.v0.Facility;
 import gov.va.api.lighthouse.facilities.api.v0.Facility.Address;
 import gov.va.api.lighthouse.facilities.api.v0.Facility.Addresses;
@@ -104,9 +105,9 @@ public class InternalFacilitiesControllerTest {
           overlay.operatingStatus() == null
               ? null
               : JacksonConfig.createMapper().writeValueAsString(overlay.operatingStatus());
-      if (overlay.cmsServices() != null) {
+      if (overlay.detailedServices() != null) {
         detailedServices = new HashSet<>();
-        for (Facility.CmsService service : overlay.cmsServices()) {
+        for (DetailedService service : overlay.detailedServices()) {
           if (1 == service.active()) {
             detailedServices.add(service.name());
           }
@@ -132,8 +133,8 @@ public class InternalFacilitiesControllerTest {
           overlay.operatingStatus() == null
               ? null
               : JacksonConfig.createMapper().writeValueAsString(overlay.operatingStatus());
-      if (overlay.cmsServices() != null) {
-        for (Facility.CmsService service : overlay.cmsServices()) {
+      if (overlay.detailedServices() != null) {
+        for (DetailedService service : overlay.detailedServices()) {
           if (1 == service.active()) {
             detailedServices.add(service.name());
           }

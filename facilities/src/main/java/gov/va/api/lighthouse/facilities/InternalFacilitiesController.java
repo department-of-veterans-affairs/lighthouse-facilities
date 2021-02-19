@@ -15,6 +15,7 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import gov.va.api.health.autoconfig.logging.Loggable;
 import gov.va.api.lighthouse.facilities.api.cms.CmsOverlay;
+import gov.va.api.lighthouse.facilities.api.cms.DetailedService;
 import gov.va.api.lighthouse.facilities.api.v0.Facility;
 import gov.va.api.lighthouse.facilities.api.v0.ReloadResponse;
 import gov.va.api.lighthouse.facilities.collector.FacilitiesCollector;
@@ -234,14 +235,14 @@ public class InternalFacilitiesController {
                                                 MAPPER,
                                                 z.cmsOperatingStatus(),
                                                 Facility.OperatingStatus.class))
-                                    .cmsServices(
+                                    .detailedServices(
                                         z.cmsServices() == null
                                             ? null
                                             : List.of(
                                                 FacilitiesJacksonConfig.quietlyMap(
                                                     MAPPER,
                                                     z.cmsServices(),
-                                                    Facility.CmsService[].class)))
+                                                    DetailedService[].class)))
                                     .build())
                             .overlayServices(z.graveyardOverlayServices())
                             .missing(

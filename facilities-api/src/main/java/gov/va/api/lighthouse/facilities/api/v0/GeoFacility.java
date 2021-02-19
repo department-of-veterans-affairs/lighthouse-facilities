@@ -3,6 +3,7 @@ package gov.va.api.lighthouse.facilities.api.v0;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import gov.va.api.lighthouse.facilities.api.cms.DetailedService;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.util.List;
@@ -121,7 +122,7 @@ public final class GeoFacility {
 
     @Valid
     @JsonProperty(value = "detailed_services", required = true)
-    List<Facility.CmsService> detailedServices;
+    List<DetailedService> detailedServices;
 
     @Schema(example = "20")
     String visn;

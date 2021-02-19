@@ -20,5 +20,5 @@ public class CmsOverlay {
 
   @Valid
   @JsonProperty("detailed_services")
-  List<Facility.CmsService> cmsServices;
+  List<DetailedService> detailedServices;
 }

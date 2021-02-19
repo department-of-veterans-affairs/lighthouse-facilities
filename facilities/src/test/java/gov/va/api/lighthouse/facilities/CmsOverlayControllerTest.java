@@ -6,7 +6,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import gov.va.api.lighthouse.facilities.api.cms.CmsOverlay;
-import gov.va.api.lighthouse.facilities.api.v0.Facility;
+import gov.va.api.lighthouse.facilities.api.cms.DetailedService;
 import gov.va.api.lighthouse.facilities.api.v0.Facility.OperatingStatus;
 import gov.va.api.lighthouse.facilities.api.v0.Facility.OperatingStatusCode;
 import java.util.HashSet;
@@ -36,13 +36,14 @@ public class CmsOverlayControllerTest {
                 .code(OperatingStatusCode.NOTICE)
                 .additionalInfo("i need attention")
                 .build())
-        .cmsServices(
+        .detailedServices(
             List.of(
-                Facility.CmsService.builder()
+                DetailedService.builder()
                     .name("COVID-19 vaccines")
                     .active(1)
-                    .descriptionNational("Vaccine availability for COVID-19")
-                    .descriptionSystem("System description for vaccine availability for COVID-19")
+                    //                    .descriptionNational("Vaccine availability for COVID-19")
+                    //                    .descriptionSystem("System description for vaccine
+                    // availability for COVID-19")
                     .descriptionFacility(
                         "Facility description for vaccine availability for COVID-19")
                     .healthServiceApiId("12345")
@@ -60,7 +61,7 @@ public class CmsOverlayControllerTest {
     ResponseEntity<Void> response = controller().saveOverlay("vha_123", overlay);
     Set<String> detailedServices = new HashSet<>();
 
-    for (Facility.CmsService service : overlay.cmsServices()) {
+    for (DetailedService service : overlay.detailedServices()) {
       if (1 == service.active()) {
         detailedServices.add(service.name());
       }

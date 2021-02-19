@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.va.api.lighthouse.facilities.api.cms.CmsOverlay;
+import gov.va.api.lighthouse.facilities.api.cms.DetailedService;
 import gov.va.api.lighthouse.facilities.api.v0.Facility;
 import gov.va.api.lighthouse.facilities.api.v0.Facility.ActiveStatus;
 import gov.va.api.lighthouse.facilities.api.v0.Facility.FacilityAttributes;
@@ -79,7 +80,7 @@ public class FacilityOverlayTest {
 
     if (overlay != null) {
       detailedServices = new HashSet<>();
-      for (Facility.CmsService service : overlay.cmsServices()) {
+      for (DetailedService service : overlay.detailedServices()) {
         if (1 == service.active()) {
           detailedServices.add(service.name());
         }
@@ -126,9 +127,9 @@ public class FacilityOverlayTest {
   private CmsOverlay overlay(OperatingStatus neato, int cmsServiceActiveValue) {
     return CmsOverlay.builder()
         .operatingStatus(neato)
-        .cmsServices(
+        .detailedServices(
             List.of(
-                Facility.CmsService.builder()
+                DetailedService.builder()
                     .name("Covid19Vaccine")
                     .active(cmsServiceActiveValue)
                     .descriptionNational("Vaccine availability for COVID-19")
