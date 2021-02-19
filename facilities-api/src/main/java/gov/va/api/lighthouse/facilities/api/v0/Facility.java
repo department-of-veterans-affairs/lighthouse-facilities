@@ -260,7 +260,6 @@ public final class Facility {
     public static final class HoursBuilder {
       @JsonProperty("Friday")
       public HoursBuilder fri(String val) {
-        System.out.println("VAL: " + val);
         return friday(val);
       }
 

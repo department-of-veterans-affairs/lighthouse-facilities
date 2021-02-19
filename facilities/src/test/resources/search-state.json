@@ -137,6 +137,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "16"
       }
     },
@@ -284,6 +285,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "8"
       }
     },
@@ -423,6 +425,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "8"
       }
     },
@@ -537,6 +540,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "8"
       }
     },
@@ -621,6 +625,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "8"
       }
     },
@@ -742,6 +747,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "8"
       }
     },
@@ -838,6 +844,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "8"
       }
     },
@@ -934,6 +941,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "8"
       }
     },
@@ -1055,6 +1063,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "8"
       }
     },
@@ -1157,6 +1166,7 @@
         "operating_status" : {
           "code" : "NORMAL"
         },
+        "detailed_services" : null,
         "visn" : "8"
       }
     }

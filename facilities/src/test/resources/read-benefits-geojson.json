@@ -51,6 +51,7 @@
     "operating_status" : {
       "code" : "NORMAL"
     },
+    "detailed_services" : null,
     "visn" : null
   }
 }
