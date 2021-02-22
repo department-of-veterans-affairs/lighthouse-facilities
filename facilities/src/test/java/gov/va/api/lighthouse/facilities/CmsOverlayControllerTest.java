@@ -41,12 +41,68 @@ public class CmsOverlayControllerTest {
                 DetailedService.builder()
                     .name("COVID-19 vaccines")
                     .active(1)
-                    //                    .descriptionNational("Vaccine availability for COVID-19")
-                    //                    .descriptionSystem("System description for vaccine
-                    // availability for COVID-19")
+                    .changed("2021-02-04T22:36:49+00:00")
+                    .descriptionNational("Vaccine availability for COVID-19")
+                    .descriptionSystem("System description for vaccine availability for COVID-19")
                     .descriptionFacility(
                         "Facility description for vaccine availability for COVID-19")
                     .healthServiceApiId("12345")
+                    .appointmentLeadIn(
+                        "Your VA health care team will contact you if you...more text")
+                    .onlineSchedulingAvailable(0)
+                    .path(
+                        "\\/erie-health-care\\/locations\\/erie-va-medical-center\\/covid-19-vaccines")
+                    .phoneNumbers(
+                        List.of(
+                            DetailedService.DetailedServicePhoneNumber.builder()
+                                .extension("123")
+                                .label("Main phone")
+                                .number("555-555-1212")
+                                .type("tel")
+                                .build()))
+                    .referralRequired(0)
+                    .walkInsAccepted(1)
+                    .serviceLocations(
+                        List.of(
+                            DetailedService.DetailedServiceLocation.builder()
+                                .serviceLocationAddress(
+                                    DetailedService.DetailedServiceAddress.builder()
+                                        .buildingNameNumber("Baxter Building")
+                                        .clinicName("Baxter Clinic")
+                                        .wingFloorOrRoomNumber("Wing East")
+                                        .address1("122 Main St.")
+                                        .address2(null)
+                                        .city("Rochester")
+                                        .state("NY")
+                                        .zipCode("14623-1345")
+                                        .countryCode("US")
+                                        .build())
+                                .phoneNumbers(
+                                    List.of(
+                                        DetailedService.DetailedServicePhoneNumber.builder()
+                                            .extension("567")
+                                            .label("Alt phone")
+                                            .number("556-565-1119")
+                                            .type("tel")
+                                            .build()))
+                                .emailContacts(
+                                    List.of(
+                                        DetailedService.DetailedServiceEmailContact.builder()
+                                            .emailAddress("georgea@va.gov")
+                                            .mailTo("George Anderson")
+                                            .build()))
+                                .facilityServiceHours(
+                                    DetailedService.DetailedServiceHours.builder()
+                                        .monday("8:30AM-7:00PM")
+                                        .tuesday("8:30AM-7:00PM")
+                                        .wednesday("8:30AM-7:00PM")
+                                        .thursday("8:30AM-7:00PM")
+                                        .friday("8:30AM-7:00PM")
+                                        .saturday("8:30AM-7:00PM")
+                                        .sunday("CLOSED")
+                                        .build())
+                                .additionalHoursInfo("Please call for an appointment outside...")
+                                .build()))
                     .build()))
         .build();
   }

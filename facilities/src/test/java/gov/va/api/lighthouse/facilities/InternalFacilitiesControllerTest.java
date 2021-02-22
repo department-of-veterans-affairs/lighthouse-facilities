@@ -81,6 +81,67 @@ public class InternalFacilitiesControllerTest {
                 .code(Facility.OperatingStatusCode.LIMITED)
                 .additionalInfo("Limited")
                 .build())
+        .detailedServices(
+            List.of(
+                DetailedService.builder()
+                    .name("Covid19Vaccine")
+                    .descriptionFacility(
+                        "Facility description for vaccine availability for COVID-19")
+                    .appointmentLeadIn(
+                        "Your VA health care team will contact you if you...more text")
+                    .onlineSchedulingAvailable(0)
+                    .phoneNumbers(
+                        List.of(
+                            DetailedService.DetailedServicePhoneNumber.builder()
+                                .extension("123")
+                                .label("Main phone")
+                                .number("555-555-1212")
+                                .type("tel")
+                                .build()))
+                    .referralRequired(0)
+                    .walkInsAccepted(1)
+                    .serviceLocations(
+                        List.of(
+                            DetailedService.DetailedServiceLocation.builder()
+                                .serviceLocationAddress(
+                                    DetailedService.DetailedServiceAddress.builder()
+                                        .buildingNameNumber("Baxter Building")
+                                        .clinicName("Baxter Clinic")
+                                        .wingFloorOrRoomNumber("Wing East")
+                                        .address1("122 Main St.")
+                                        .address2(null)
+                                        .city("Rochester")
+                                        .state("NY")
+                                        .zipCode("14623-1345")
+                                        .countryCode("US")
+                                        .build())
+                                .phoneNumbers(
+                                    List.of(
+                                        DetailedService.DetailedServicePhoneNumber.builder()
+                                            .extension("567")
+                                            .label("Alt phone")
+                                            .number("556-565-1119")
+                                            .type("tel")
+                                            .build()))
+                                .emailContacts(
+                                    List.of(
+                                        DetailedService.DetailedServiceEmailContact.builder()
+                                            .emailAddress("georgea@va.gov")
+                                            .mailTo("George Anderson")
+                                            .build()))
+                                .facilityServiceHours(
+                                    DetailedService.DetailedServiceHours.builder()
+                                        .monday("8:30AM-7:00PM")
+                                        .tuesday("8:30AM-7:00PM")
+                                        .wednesday("8:30AM-7:00PM")
+                                        .thursday("8:30AM-7:00PM")
+                                        .friday("8:30AM-7:00PM")
+                                        .saturday("8:30AM-7:00PM")
+                                        .sunday("CLOSED")
+                                        .build())
+                                .additionalHoursInfo("Please call for an appointment outside...")
+                                .build()))
+                    .build()))
         .build();
   }
 
@@ -128,6 +189,7 @@ public class InternalFacilitiesControllerTest {
   private FacilityGraveyardEntity _graveyardEntityWithOverlay(Facility fac, CmsOverlay overlay) {
     String operatingStatusString = null;
     Set<String> detailedServices = new HashSet<>();
+    String cmsServicesString = null;
     if (overlay != null) {
       operatingStatusString =
           overlay.operatingStatus() == null
@@ -140,12 +202,18 @@ public class InternalFacilitiesControllerTest {
           }
         }
       }
+
+      cmsServicesString =
+          overlay.detailedServices() == null
+              ? null
+              : JacksonConfig.createMapper().writeValueAsString(overlay.detailedServices());
     }
     return FacilityGraveyardEntity.builder()
         .id(FacilityEntity.Pk.fromIdString(fac.id()))
         .facility(FacilitiesJacksonConfig.createMapper().writeValueAsString(fac))
         .cmsOperatingStatus(operatingStatusString)
         .graveyardOverlayServices(detailedServices)
+        .cmsServices(cmsServicesString)
         .missingTimestamp(LocalDateTime.now().minusDays(4).toInstant(ZoneOffset.UTC).toEpochMilli())
         .lastUpdated(Instant.now())
         .build();

@@ -80,7 +80,7 @@ public class DetailedService {
 
   // todo description and example?
   @JsonProperty("phone_numbers")
-  List<DetailedServicePhoneNumbers> phoneNumbers;
+  List<DetailedServicePhoneNumber> phoneNumbers;
 
   @Schema(
       example = "0",
@@ -91,7 +91,7 @@ public class DetailedService {
 
   // todo description and example?
   @JsonProperty("service_locations")
-  List<DetailedServiceLocations> serviceLocations;
+  List<DetailedServiceLocation> serviceLocations;
 
   @Schema(
       example = "1",
@@ -155,7 +155,7 @@ public class DetailedService {
   @Builder
   @JsonInclude()
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-  public static final class DetailedServicePhoneNumbers {
+  public static final class DetailedServicePhoneNumber {
     String extension;
 
     String label;
@@ -176,20 +176,20 @@ public class DetailedService {
     "facility_service_hours",
     "additional_hours_info"
   })
-  public static final class DetailedServiceLocations {
+  public static final class DetailedServiceLocation {
 
     @JsonProperty("additional_hours_info")
     String additionalHoursInfo;
 
     @JsonProperty("email_contacts")
-    List<DetailedServiceEmailContacts> emailContacts;
+    List<DetailedServiceEmailContact> emailContacts;
 
     @JsonProperty("facility_service_hours")
     @Valid
     DetailedServiceHours facilityServiceHours;
 
     @JsonProperty("phone_numbers")
-    List<DetailedServicePhoneNumbers> phoneNumbers;
+    List<DetailedServicePhoneNumber> phoneNumbers;
 
     @JsonProperty("service_location_address")
     DetailedServiceAddress serviceLocationAddress;
@@ -198,7 +198,7 @@ public class DetailedService {
   @Data
   @Builder
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-  public static final class DetailedServiceEmailContacts {
+  public static final class DetailedServiceEmailContact {
     @Schema(example = "georgea@va.gov")
     @JsonProperty("email_address")
     String emailAddress;
