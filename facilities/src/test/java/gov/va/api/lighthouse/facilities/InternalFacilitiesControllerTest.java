@@ -232,7 +232,7 @@ public class InternalFacilitiesControllerTest {
     ReloadResponse response = _controller().reload().getBody();
     assertThat(response.facilitiesCreated()).isEqualTo(List.of("vha_f1"));
     assertThat(response.facilitiesUpdated()).isEqualTo(List.of("vha_f2"));
-    assertThat(facilityRepository.findAll()).isEqualTo(List.of(_entity(f1), _entity(f2)));
+    assertThat(facilityRepository.findAll()).containsExactlyInAnyOrder(_entity(f1), _entity(f2));
   }
 
   @Test

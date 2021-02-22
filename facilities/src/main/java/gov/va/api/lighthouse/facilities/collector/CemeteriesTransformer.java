@@ -13,11 +13,14 @@ import lombok.NonNull;
 @Builder
 final class CemeteriesTransformer {
   @NonNull CdwCemetery cdwFacility;
+
+  String facilityName;
+
   String website;
 
   private Facility.FacilityAttributes attributes() {
     return Facility.FacilityAttributes.builder()
-        .name(cdwFacility.fullName())
+        .name(facilityName(cdwFacility.fullName()))
         .facilityType(Facility.FacilityType.va_cemetery)
         .classification(cdwFacility.siteType())
         .latitude(cdwFacility.latitude())
@@ -56,11 +59,13 @@ final class CemeteriesTransformer {
         .build();
   }
 
-  private Facility.Phone phone(String attPhone, String attFax) {
+  String facilityName(String cdwName) {
+    return facilityName != null ? facilityName : cdwName;
+  }
 
+  private Facility.Phone phone(String attPhone, String attFax) {
     String main = phoneTrim(attPhone);
     String fax = phoneTrim(attFax);
-
     if (allBlank(main, fax)) {
       return null;
     } else {
@@ -76,8 +81,7 @@ final class CemeteriesTransformer {
         .build();
   }
 
-  String website(String url) {
-    /* CDW could return a string NULL... We don't want to return that.*/
-    return url == null || url.equalsIgnoreCase("NULL") || url.isEmpty() ? website : url;
+  String website(String cdwUrl) {
+    return website != null ? website : cdwUrl;
   }
 }

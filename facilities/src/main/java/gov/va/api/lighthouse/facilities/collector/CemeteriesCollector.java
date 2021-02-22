@@ -78,6 +78,7 @@ final class CemeteriesCollector {
               facility ->
                   CemeteriesTransformer.builder()
                       .cdwFacility(facility)
+                      .facilityName(xmlFacilityName(cemeteries, facility.siteId()))
                       .website(xmlOrCsvWebsite(cemeteries, facility.siteId()))
                       .build()
                       .toFacility())
@@ -146,6 +147,16 @@ final class CemeteriesCollector {
         cemeteries.size());
     checkState(!cemeteries.isEmpty(), "No cems/national.xml entries!");
     return cemeteries;
+  }
+
+  private String xmlFacilityName(
+      List<NationalCemeteries.NationalCemetery> cemeteries, String siteId) {
+    for (NationalCemeteries.NationalCemetery cem : cemeteries) {
+      if (cem.id.equals(siteId)) {
+        return cem.name;
+      }
+    }
+    return null;
   }
 
   private String xmlOrCsvWebsite(

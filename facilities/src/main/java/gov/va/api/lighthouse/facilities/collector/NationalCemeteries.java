@@ -29,11 +29,13 @@ public class NationalCemeteries {
     @JacksonXmlProperty(isAttribute = true, localName = "station")
     String id;
 
+    @JacksonXmlProperty(isAttribute = true, localName = "cem_name")
+    String name;
+
     @JacksonXmlProperty(isAttribute = true, localName = "cem_url")
     String url;
 
     // Unused fields:
-    // cem_name
     // lat
     // long
     // statecode
